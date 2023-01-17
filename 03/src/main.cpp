@@ -14,6 +14,11 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
+//The window we'll be rendering to
+SDL_Window* gWindow = NULL;
+SDL_Surface* gScreenSurface = NULL;
+SDL_Surface* gXOut = NULL;
+
 
 bool init() {
     
@@ -36,8 +41,8 @@ bool init() {
 
 bool loadMedia() {
 
-	gHelloWorld = SDL_LoadBMP( image_path );
-	if( gHelloWorld == NULL ) {
+	gXOut = SDL_LoadBMP( "assets/hello_world.bmp" );
+	if( gXOut == NULL ) {
 		printf( "Unable to load image %s! SDL Error: %s\n", "assets/hello_world.bmp", SDL_GetError() );
         return false;
     } 
@@ -47,8 +52,8 @@ bool loadMedia() {
 
 void close() {
 
-    SDL_FreeSurface( gHelloWorld );
-    gHelloWorld = NULL;
+    SDL_FreeSurface( gXOut );
+    gXOut = NULL;
 
     SDL_DestroyWindow(gWindow);
     gWindow = NULL;
@@ -66,7 +71,7 @@ void event_loop() {
             /* code */
             switch (e.type) {
             case SDL_MOUSEBUTTONDOWN: {
-                quit = true;
+                // quit = true;
 
                 break;
             }
@@ -88,27 +93,19 @@ void event_loop() {
             }
 
         }
-
-    	SDL_BlitSurface( gHelloWorld, NULL, gScreenSurface, NULL );
-
-	    SDL_UpdateWindowSurface( gWindow );
     }
 }
 
 int main(int argc, char const* argv[]) {
-
-    /* code */
-
-    if ( !init() ) {
-
-        return -1;
-    } 
     
-    int s = loadMedia();
-
-    if (!s) {
-        return -2;
+    if (!init()) {
+        return -1;
     }
+
+    if (!loadMedia()) {
+        return -1;
+    }
+
 
     event_loop();
     
