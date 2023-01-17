@@ -2,6 +2,7 @@
 #include <string>
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #include "config.h"
 
@@ -119,7 +120,7 @@ void event_loop() {
 
         }
 
-    	SDL_BlitSurface( gStretchedSurface, NULL, gScreenSurface, NULL );
+    	SDL_BlitSurface( gPNGSurface, NULL, gScreenSurface, NULL );
 
 	    SDL_UpdateWindowSurface( gWindow );
     }
