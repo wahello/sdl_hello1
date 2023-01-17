@@ -4,6 +4,7 @@
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
+const char* image_path = "assets/hello_world.bmp";
 
 
 
