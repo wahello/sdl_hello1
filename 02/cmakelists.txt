@@ -1,0 +1,23 @@
+project(02)
+
+add_executable(${PROJECT_NAME} 
+    src/main.cpp
+)
+
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE
+        CONAN_PKG::sdl
+)
+
+message(status " ---= CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
+message(status " ---= CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
+message(status " ---= CMAKE_CURRRENT_BINARY_DIR: ${CMAKE_CURRRENT_BINARY_DIR}")
+message(status " ---= CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}")
+message(status " ---= EXECUTABLE_OUTPUT_PATH: ${EXECUTABLE_OUTPUT_PATH}")
+message(status " ---= PROJECT_BINARY_DIR: ${PROJECT_BINARY_DIR}")
+message(status " ---= CMAKE_CURRENT_LIST_DIR: ${CMAKE_CURRENT_LIST_DIR}")
+message(status " ---= CMAKE_RUNTIME_OUTPUT_DIRECTORY: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/assets
+            )
