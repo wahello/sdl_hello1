@@ -1,0 +1,12 @@
+project("PROJECT_NAME")
+
+add_executable(${PROJECT_NAME} 
+    src/main.c
+)
+
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE
+        CONAN_PKG::sdl
+)
+
+
