@@ -28,7 +28,7 @@ bool init() {
         return false;
     }
     //Create window
-    gWindow = SDL_CreateWindow("SDL tutorial 02", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    gWindow = SDL_CreateWindow("SDL tutorial 03", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (gWindow == NULL) {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
         return false;
@@ -41,7 +41,7 @@ bool init() {
 
 bool loadMedia() {
 
-	gXOut = SDL_LoadBMP( "assets/hello_world.bmp" );
+	gXOut = SDL_LoadBMP( image_path );
 	if( gXOut == NULL ) {
 		printf( "Unable to load image %s! SDL Error: %s\n", "assets/hello_world.bmp", SDL_GetError() );
         return false;
