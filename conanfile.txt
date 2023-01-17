@@ -1,7 +1,13 @@
 [requires]
 
 sdl/2.26.1 
-
+sdl_image/2.0.5
+sdl_mixer/2.0.4
+sdl_net/2.0.1
+sdl_ttf/2.0.18
+libpng/1.6.39
+libjpeg/9d
+spdlog/1.11.0
 
 
 [generators]
