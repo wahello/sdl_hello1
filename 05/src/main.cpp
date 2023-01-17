@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string>
 
 #include <SDL2/SDL.h>
 
@@ -14,12 +15,12 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
+SDL_Surface* loadSurface( std::string path );
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
-SDL_Surface* gHelloWorld = NULL;
-
+SDL_Surface* gStretchedSurface = NULL;
 
 bool init() {
     
@@ -29,7 +30,7 @@ bool init() {
         return false;
     }
     //Create window
-    gWindow = SDL_CreateWindow("SDL tutorial 02", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    gWindow = SDL_CreateWindow("SDL tutorial 05", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (gWindow == NULL) {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
         return false;
@@ -42,8 +43,8 @@ bool init() {
 
 bool loadMedia() {
 
-	gHelloWorld = SDL_LoadBMP( image_path );
-	if( gHelloWorld == NULL ) {
+	gStretchedSurface = loadSurface( image_path );
+	if( gStretchedSurface == NULL ) {
 		printf( "Unable to load image %s! SDL Error: %s\n", "assets/hello_world.bmp", SDL_GetError() );
         return false;
     } 
@@ -53,13 +54,36 @@ bool loadMedia() {
 
 void close() {
 
-    SDL_FreeSurface( gHelloWorld );
-    gHelloWorld = NULL;
+    SDL_FreeSurface( gStretchedSurface );
+    gStretchedSurface = NULL;
 
     SDL_DestroyWindow(gWindow);
     gWindow = NULL;
 
     SDL_Quit();
+}
+
+SDL_Surface* loadSurface( std::string path ) {
+
+	//The final optimized image
+	SDL_Surface* optimizedSurface = NULL;
+
+	//Load image at specified path
+	SDL_Surface* loadedSurface = SDL_LoadBMP( path.c_str() );
+    if (loadedSurface == NULL) {
+		printf( "Unable to load image %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
+        return NULL;
+    } 
+	//Convert surface to screen format
+	optimizedSurface = SDL_ConvertSurface( loadedSurface, gScreenSurface->format, 0 );
+    if( optimizedSurface == NULL ) {
+		printf( "Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
+    }
+
+    //Get rid of old loaded surface
+    SDL_FreeSurface( loadedSurface );
+    
+    return optimizedSurface;
 }
 
 void event_loop() {
@@ -95,7 +119,7 @@ void event_loop() {
 
         }
 
-    	SDL_BlitSurface( gHelloWorld, NULL, gScreenSurface, NULL );
+    	SDL_BlitSurface( gStretchedSurface, NULL, gScreenSurface, NULL );
 
 	    SDL_UpdateWindowSurface( gWindow );
     }
