@@ -12,3 +12,10 @@ cmake ..
 make   
 ```
 <!-- cmake .. -DCMAKE_TOOLCHAIN_FILE=～/.config/vcpkg/scripts/buildsystems/vcpkg.cmake -->
+
+[sdl tutorial](https://www.bilibili.com/video/BV1rK411V7eu?p=28)
+https://github.com/wahello/sdl_hello1.git
+
+
+
+
