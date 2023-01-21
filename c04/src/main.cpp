@@ -9,8 +9,6 @@ const int WIDTH = 100;
 const int HEIGHT = 100;
 
 
-
-
 void event_loop() {
 
     SDL_Event e;
@@ -72,6 +70,11 @@ int main(int argc, char const *argv[])
     SDL_FillRect(surface, &rr, 0xffff0000); // ARGB 
     SDL_UpdateWindowSurface(win);
 
+    ((uint32_t *)(surface->pixels))[SCREEN_WIDTH * 50 + 50] = 0xffff00ff;
+    ((uint32_t *)(surface->pixels))[SCREEN_WIDTH * 50 + 51] = 0xffff00ff;
+    ((uint32_t *)(surface->pixels))[SCREEN_WIDTH * 50 + 52] = 0xffff00ff;
+    ((uint32_t *)(surface->pixels))[SCREEN_WIDTH * 50 + 53] = 0xffff00ff;
+    SDL_UpdateWindowSurface(win);
     
     event_loop();
 
