@@ -60,10 +60,10 @@ void event_loop(SDL_Window * win, SDL_Surface *surface) {
 
         }
         
-        uint32_t current = SDL_GetTicks();
-        uint32_t cost = current - begin;
-        uint32_t  frame = 1000 / frame_rate;
-        uint32_t delay = frame - cost;
+        long current = SDL_GetTicks();
+        long cost = current - begin;
+        long  frame = 1000 / frame_rate;
+        long delay = frame - cost;
 
         if (delay > 0) {
             SDL_Delay(20);
