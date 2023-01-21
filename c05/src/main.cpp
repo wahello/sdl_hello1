@@ -57,6 +57,9 @@ void event_loop(SDL_Window * win, SDL_Surface *surface) {
             }
 
         }
+
+        SDL_Delay(20);
+        
     }
 }
 
