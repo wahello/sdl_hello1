@@ -66,7 +66,7 @@ void event_loop(SDL_Window * win, SDL_Surface *surface) {
         long delay = frame - cost;
 
         if (delay > 0) {
-            SDL_Delay(20);
+            SDL_Delay(delay);
         }
         
     }
