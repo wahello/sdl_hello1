@@ -1,4 +1,4 @@
-project(c06-fixed-frame-rate)
+project(c06-pull-event)
 
 add_executable(${PROJECT_NAME} 
     src/main.cpp
@@ -8,6 +8,8 @@ target_link_libraries(${PROJECT_NAME}
     PRIVATE
         CONAN_PKG::sdl
 )
+
+
 
 
 # add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD

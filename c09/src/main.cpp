@@ -2,12 +2,34 @@
 #include <SDL2/SDL.h>
 
 
+#include "config.h"
 
-void event_loop() {
+
+const int WIDTH = 100;
+const int HEIGHT = 100;
+
+int x = 0;
+
+void draw(SDL_Window * win, SDL_Surface *surface) {
+    x ++;
+
+    SDL_Rect r = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+    SDL_FillRect(surface, &r, 0xffffffff); // ARGB 
+    // SDL_UpdateWindowSurface(win);
+
+    SDL_Rect rr = {x, 0, 100, 100};
+    SDL_FillRect(surface, &rr, 0xffff0000); // ARGB 
+    SDL_UpdateWindowSurface(win);
+    
+}
+
+void event_loop(SDL_Window * win, SDL_Surface *surface) {
 
     SDL_Event e;
     bool quit = false;
     while (!quit) {
+        
+        draw(win, surface);
 
         while (SDL_PollEvent(&e)) {
             /* code */
@@ -35,6 +57,9 @@ void event_loop() {
             }
 
         }
+
+        SDL_Delay(20);
+        
     }
 }
 
@@ -48,14 +73,16 @@ int main(int argc, char const *argv[])
         return 1;
     }
 
-    SDL_Window* win = SDL_CreateWindow("Hello world!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+    SDL_Window* win = SDL_CreateWindow("Hello world!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
     if (win == NULL) {
         SDL_Log("Can not create window, %s", SDL_GetError());
         return 2;
     }
 
-    event_loop();
+    SDL_Surface* surface = SDL_GetWindowSurface(win);
+
+    event_loop(win, surface);
 
     SDL_DestroyWindow(win);
 
