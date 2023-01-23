@@ -87,7 +87,7 @@ int main(int argc, char const *argv[])
         return 2;
     }
 
-    SDL_Surface *img = IMG_Load("assets/cat.jpg");
+    SDL_Surface *img = IMG_Load(img_path);
     SDL_Surface* surface = SDL_GetWindowSurface(win);
 
     event_loop(win, surface, img);
