@@ -23,6 +23,18 @@ foreach (_variableName ${_variableNames})
     message(STATUS  " -===: " "${_variableName}=${${_variableName}}")
 endforeach()
 
+
+
+message(status " -s--= CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
+message(status " -s--= CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
+message(status " -s--= CMAKE_CURRRENT_BINARY_DIR: ${CMAKE_CURRRENT_BINARY_DIR}")
+message(status " -s--= CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}")
+message(status " -s--= EXECUTABLE_OUTPUT_PATH: ${EXECUTABLE_OUTPUT_PATH}")
+message(status " -s--= PROJECT_BINARY_DIR: ${PROJECT_BINARY_DIR}")
+message(status " -s--= CMAKE_CURRENT_LIST_DIR: ${CMAKE_CURRENT_LIST_DIR}")
+message(status " -s--= CMAKE_RUNTIME_OUTPUT_DIRECTORY: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+
+
 add_subdirectory(01)
 add_subdirectory(02)
 add_subdirectory(03)
